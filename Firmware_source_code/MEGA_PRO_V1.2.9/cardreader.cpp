@@ -611,7 +611,7 @@ void CardReader::openFile(char* name, bool read, bool push_current/*=false*/) {
       getfilename(0, fname);
       lcd_setstatus(longFilename[0] ? longFilename : fname);
 
-      if(file_type==1)//�����bmp�ļ�����Ҫ�Ѻܶ���Ϣ������
+      if(file_type==1)//锟斤拷锟斤拷锟絙mp锟侥硷拷锟斤拷锟斤拷要锟窖很讹拷锟斤拷息锟斤拷锟斤拷锟斤拷
       	{
       	unsigned char * pp =NULL;
 		
@@ -628,10 +628,10 @@ void CardReader::openFile(char* name, bool read, bool push_current/*=false*/) {
 		Laser_printer_st.pic_bit=st_bmp.biBitCount[0];
 		Laser_printer_st.pic_start=54;
 		Laser_printer_st.pic_ptr=Laser_printer_st.pic_widht*Laser_printer_st.pic_hight*Laser_printer_st.pic_bit/8+Laser_printer_st.pic_start;
-		Laser_printer_st.pic_realy_widht=(((Laser_printer_st.pic_widht*Laser_printer_st.pic_bit)+31)>>5)<<2;//����ÿ�е��ֽ���
+		Laser_printer_st.pic_realy_widht=(((Laser_printer_st.pic_widht*Laser_printer_st.pic_bit)+31)>>5)<<2;//锟斤拷锟斤拷每锟叫碉拷锟街斤拷锟斤拷
 		setIndex(54);
 		
-		//����ЩͼƬ��Ϣ��ӡ����
+		//锟斤拷锟斤拷些图片锟斤拷息锟斤拷印锟斤拷锟斤拷
 		pp = (unsigned char *)(&st_bmp);
 		SERIAL_PROTOCOL("file size:");	SERIAL_PROTOCOLLN(Laser_printer_st.pic_file_size);
 		SERIAL_PROTOCOL("pic_widht: "); SERIAL_PROTOCOLLN(Laser_printer_st.pic_widht);

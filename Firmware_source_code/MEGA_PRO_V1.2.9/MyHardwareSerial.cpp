@@ -297,4 +297,3 @@ MyHardwareSerial::operator bool() {
 #endif
 
 #endif // whole file
-
