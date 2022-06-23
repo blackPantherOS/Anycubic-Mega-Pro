@@ -942,4 +942,3 @@ inline void report_pin_state_extended(int8_t pin, bool ignore) {
   pwm_details(pin);
   SERIAL_EOL;
 }
-

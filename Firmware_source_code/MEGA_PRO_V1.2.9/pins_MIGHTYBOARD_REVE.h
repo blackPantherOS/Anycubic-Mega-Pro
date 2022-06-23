@@ -219,4 +219,3 @@
 //
 #define SDSS                53 // B0
 #define SD_DETECT_PIN       30 // C7
-

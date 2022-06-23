@@ -243,4 +243,3 @@
 #endif // LCD_HEIGHT < 4
 
 #endif // LANGUAGE_GL_H
-

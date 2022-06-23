@@ -87,30 +87,30 @@ unsigned char      biClrImportant[4];
 
 
 typedef struct 
-{		/*ͼƬ��ӡ���ֲ���**/
+{		/*图片锟斤拷印锟斤拷锟街诧拷锟斤拷**/
 	unsigned long pic_file_size;
 	unsigned long pic_ptr;
 	unsigned long pic_start;
 
-	float pic_pixel_distance;//����֮��ľ��루0.1-0.3��
-	float laser_height;//����߶�
-	float x_offset;//X�����ƫ��
-	float y_offset;//Y�����ƫ��
+	float pic_pixel_distance;//锟斤拷锟斤拷之锟斤拷木锟斤拷耄�0.1-0.3锟斤拷
+	float laser_height;//锟斤拷锟斤拷叨锟�
+	float x_offset;//X锟斤拷锟斤拷锟狡拷锟�
+	float y_offset;//Y锟斤拷锟斤拷锟狡拷锟�
 	
 	unsigned int  pic_realy_widht;
 	unsigned int  pic_widht;
  	unsigned int  pic_hight;
 	unsigned char pic_bit;
-	unsigned char pic_widht_odd; //��ż��
-	unsigned char pic_hight_odd; //��ż��
+	unsigned char pic_widht_odd; //锟斤拷偶锟斤拷
+	unsigned char pic_hight_odd; //锟斤拷偶锟斤拷
 	
-	unsigned char pic_print_status; //��ӡ״̬
-	unsigned char pic_dir;//ͼƬ����
+	unsigned char pic_print_status; //锟斤拷印状态
+	unsigned char pic_dir;//图片锟斤拷锟斤拷
 	
-	unsigned char pic_vector;//�Ƿ���ʸ��ͼ��1Ϊʸ��ͼ��0Ϊλͼ
-	unsigned char pic_x_mirror; //X������,1Ϊ����
-	unsigned char pic_y_mirror; //Y������1Ϊ����
-	unsigned char pic_laser_time;//��������ʱ�䣨10-30��
+	unsigned char pic_vector;//锟角凤拷锟斤拷矢锟斤拷图锟斤拷1为矢锟斤拷图锟斤拷0为位图
+	unsigned char pic_x_mirror; //X锟斤拷锟斤拷锟斤拷,1为锟斤拷锟斤拷
+	unsigned char pic_y_mirror; //Y锟斤拷锟斤拷锟斤拷1为锟斤拷锟斤拷
+	unsigned char pic_laser_time;//锟斤拷锟斤拷锟斤拷锟斤拷时锟戒（10-30锟斤拷
 
 
 
@@ -512,7 +512,7 @@ void do_blocking_move_to_xy(const float &x, const float &y, const float &fr_mm_s
 #define PIC_FIXED 0.1f //  //  POINT/MM
 #define PIC_OPEN  50 //  //  ms
 #define PIC_SPEDD 20000
-#define MIN_GRAY_VLAUE  20  //��С�ĻҶ�ֵ С�ڸ�ֵ����������
+#define MIN_GRAY_VLAUE  20  //锟斤拷小锟侥灰讹拷值 小锟节革拷值锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
 #define LASER_PRINT_SPEED 30  //50*60
 
 

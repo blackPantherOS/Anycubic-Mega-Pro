@@ -51,7 +51,7 @@
  */
 #define CONFIGURATION_H_VERSION 010100
 
-#define MSG_MY_VERSION "V1.2.9"//2020.4.17 带调平补�?
+#define MSG_MY_VERSION "V1.2.9"//2020.4.17 带调平补?
 
 #define OutageTest  //断电续打
 
