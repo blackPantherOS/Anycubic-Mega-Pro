@@ -985,7 +985,7 @@ void send_pic_param()
 NEW_SERIAL_PROTOCOLPGM("A45V");
 TFT_SERIAL_SPACE();
 NEW_SERIAL_PROTOCOLPGM("W");
-NEW_SERIAL_PROTOCOL(Laser_printer_st.pic_widht);//ͼƬ�Ŀ��?
+NEW_SERIAL_PROTOCOL(Laser_printer_st.pic_widht);//ͼƬ�Ŀ��?
 TFT_SERIAL_SPACE();
 NEW_SERIAL_PROTOCOLPGM("H");
 NEW_SERIAL_PROTOCOL(Laser_printer_st.pic_hight);//ͼƬ�ĸ߶�
@@ -1306,7 +1306,7 @@ void get_command_from_TFT()
                               sdcardstartprintingflag=1;
                               TFT_SERIAL_ENTER();
 							  
-							  if(file_type == 1)//���ͼƬ�ļ��Ļ���һ��Ҫ��ͼƬ��Ϣ���͹��?
+							  if(file_type == 1)//���ͼƬ�ļ��Ļ���һ��Ҫ��ͼƬ��Ϣ���͹��?
 							  send_pic_param();
 							
 
@@ -1440,7 +1440,7 @@ void get_command_from_TFT()
                             unsigned int movespeed=0;
                             char value[30];
                             if(TFTcode_seen('F')) movespeed =TFTcode_value();//movespeed=constrain(TFTcode_value(), 1,5000);                     
-                            if(!TFTcode_seen('B')) enqueue_and_echo_commands_P(PSTR("G91"));   //B��ʾ�������꣬ûB��ʾ�������?                                         
+                            if(!TFTcode_seen('B')) enqueue_and_echo_commands_P(PSTR("G91"));   //B��ʾ�������꣬ûB��ʾ�������?                                         
                             if(TFTcode_seen('X'))
                             {
                                coorvalue=TFTcode_value(); 
@@ -4199,7 +4199,7 @@ inline void gcode_G6()
 if ( code_seen('S')) {
 	if(code_value_byte()>0)
 	{WRITE(HEATER_0_PIN, 1);
-	laser_status = 1;
+	 laser_status = 1;
 		}
 	else
 	 {
@@ -4208,7 +4208,46 @@ if ( code_seen('S')) {
 	  }
     }
 return ;
+}
 
+inline void gcode_M3()
+{
+  millis_t dwell_ms = 0;
+  dwell_ms = 0; // milliseconds to wait
+  stepper.synchronize();
+  refresh_cmd_timeout();
+  dwell_ms += previous_cmd_ms;  // keep track of when we started waiting
+  if (!lcd_hasstatus()) LCD_MESSAGEPGM(MSG_DWELL);
+  while (PENDING(millis(), dwell_ms)) idle();
+
+ if ( code_seen('S')) {
+
+  if(code_value_byte()>0)
+  {analogWrite(HEATER_0_PIN, code_value_byte);
+   laser_status = 1;
+    }
+  else
+   {
+    analogWrite(HEATER_0_PIN, 0);
+    laser_status = 0;
+    }
+    }
+return ;
+}
+
+inline void gcode_M5()
+{
+  millis_t dwell_ms = 0;
+  dwell_ms = 0; // milliseconds to wait
+  stepper.synchronize();
+  refresh_cmd_timeout();
+  dwell_ms += previous_cmd_ms;  // keep track of when we started waiting
+  if (!lcd_hasstatus()) LCD_MESSAGEPGM(MSG_DWELL);
+  while (PENDING(millis(), dwell_ms)) idle();
+
+  analogWrite(HEATER_0_PIN, 0);
+  laser_status = 0;
+return ;
 }
 
 /**
@@ -9556,12 +9595,12 @@ SERIAL_PROTOCOLLN(cvalue);
   }
   else if(laser_print_steps==1)
   {
-   if(planner.blocks_queued())return;//��������˶�?�򷵻�
+   if(planner.blocks_queued())return;//��������˶�?�򷵻�
    laser_print_steps =2;
   }
     else if(laser_print_steps==2)
   {
-   Laset_print_picture( );//��ʼ������?
+   Laset_print_picture( );//��ʼ������?
    laser_print_steps=0;
    card.printingHasFinished();
    card.checkautostart(true);
@@ -9759,6 +9798,13 @@ void process_next_command() {
           gcode_M0_M1();
           break;
       #endif // ULTIPANEL
+
+      case 03: // M03: LaserPWM
+        gcode_M3();
+        break;
+      case 05: // M05: LaserOFF
+        gcode_M5();
+        break;
 
       case 17: // M17: Enable all stepper motors
         gcode_M17();
@@ -11875,12 +11921,12 @@ void print_next_mode()
 
 	 
 	time_save += 5000;//����3,������Ϊ�˰���һ������ִ�н���
-	return;//����˶�û������ɣ��򷵻أ�����˶������ˣ��Ϳ���׼����һ����ӡ�ˡ�?
+	return;//����˶�û������ɣ��򷵻أ�����˶������ˣ��Ϳ���׼����һ����ӡ�ˡ�?
  }
 // if(thermalManager.degBed()>40)
  	//{
  	//SERIAL_PROTOCOLLN("Wait for the temperature to drop below 40 degrees.......");
- 	//return;//����ȴ��¶Ȼ��ܸߣ���ô�͵ȴ�?
+ 	//return;//����ȴ��¶Ȼ��ܸߣ���ô�͵ȴ�?
  	//}
     en_cycle_print = 0;
 
@@ -12003,25 +12049,25 @@ void stop() {
  *  - Print startup messages and diagnostics
  *  - Get EEPROM or default settings
  *  - Initialize managers for:
- *    �?temperature
- *    �?planner
- *    �?watchdog
- *    �?stepper
- *    �?photo pin
- *    �?servos
- *    �?LCD controller
- *    �?Digipot I2C
- *    �?Z probe sled
- *    �?status LEDs
+ *    �?temperature
+ *    �?planner
+ *    �?watchdog
+ *    �?stepper
+ *    �?photo pin
+ *    �?servos
+ *    �?LCD controller
+ *    �?Digipot I2C
+ *    �?Z probe sled
+ *    �?status LEDs
  */
 
 void laser_init()
 {
 
-	Laser_printer_st.pic_pixel_distance = PIC_FIXED;//����֮��ľ���?.1-0.3��
-	Laser_printer_st.laser_height = 50;//����߶�?
-	Laser_printer_st.x_offset = 0;//X�����ƫ��?
-	Laser_printer_st.x_offset = 0;//Y�����ƫ��?
+	Laser_printer_st.pic_pixel_distance = PIC_FIXED;//����֮��ľ���?.1-0.3��
+	Laser_printer_st.laser_height = 50;//����߶�?
+	Laser_printer_st.x_offset = 0;//X�����ƫ��?
+	Laser_printer_st.x_offset = 0;//Y�����ƫ��?
 	
 	Laser_printer_st.pic_vector = 0;//�Ƿ���ʸ��ͼ��1Ϊʸ��ͼ��0Ϊλͼ
 	Laser_printer_st.pic_x_mirror = 1; //X������,1Ϊ����
@@ -12204,7 +12250,7 @@ setup_OutageTestPin();
   setupSDCARD(); 
   SetupFilament();
    _delay_ms(10);  // wait 1sec to display the splash screen 
- laser_init();//�����ӡ��������?
+ laser_init();//�����ӡ��������?
 }
 
 
