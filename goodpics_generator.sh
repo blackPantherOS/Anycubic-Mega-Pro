@@ -18,6 +18,6 @@ fi
 
 echo
 echo -n "Converting: $(readlink -f $1) to $PWD/$(echo $1 | sed 's|\.[a-z].*|.bmp|')"
-convert $1 "BMP3:$(echo $1 | sed 's|\.[a-z].*|.bmp|')"
+convert -background white -alpha remove -alpha off $1 "BMP3:$(echo $1 | sed 's|\.[a-z].*|.bmp|')"
 echo " Finished!"
 echo 
